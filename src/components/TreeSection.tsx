@@ -7,6 +7,8 @@ import { SkeletonUtils } from 'three-stdlib';
 import { EffectComposer, ChromaticAberration, Noise, Vignette, Bloom } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 
+const TREE_MODEL_URL = `${import.meta.env.BASE_URL}3dlocalasset/tree_-_scaniverse_3d_gaussian_splat_ply.glb`;
+
 function ScrollEffects({ scrollRef }: { scrollRef: React.MutableRefObject<number> }) {
   const chromaRef = useRef<any>(null);
   const noiseRef = useRef<any>(null);
@@ -193,7 +195,7 @@ function Jellyfish({ position, scale = 1, color = "#a7f3d0" }: { position: [numb
 }
 
 function GlowingTree({ position, scale = 1 }: { position: [number, number, number], scale?: number }) {
-  const { scene } = useGLTF("/3dlocalasset/tree_-_scaniverse_3d_gaussian_splat_ply.glb");
+  const { scene } = useGLTF(TREE_MODEL_URL);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
 
   useEffect(() => {
@@ -302,7 +304,7 @@ function Overlay({ scrollYProgress }: { scrollYProgress: MotionValue<number> }) 
   );
 }
 
-useGLTF.preload("/3dlocalasset/tree_-_scaniverse_3d_gaussian_splat_ply.glb");
+useGLTF.preload(TREE_MODEL_URL);
 
 export function TreeSection() {
   const containerRef = useRef(null);
